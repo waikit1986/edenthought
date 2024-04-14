@@ -1,27 +1,30 @@
-# Import and initialise our environment variables
-import environ
 
-env = environ.Env()
-environ.Env.read_env()
+# - Import and initialise our environment variables
+
+#import environ
+#env = environ.Env()
+#environ.Env.read_env()
+
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-f+v-yad(*^(av&3ctn*thm*9=u!&i9n5*q%c5$w)#p7cs(-m0&'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['edenthought-nt3n.onrender.com', '*']
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://edenthought-nt3n.onrender.com']
-
+#CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
@@ -35,16 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'journal',
-
+    
     "crispy_forms",
     "crispy_bootstrap5",
 
     'storages',
+
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,30 +82,45 @@ TEMPLATES = [
 WSGI_APPLICATION = 'edenthought.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-'''
+
+# SQLite database configuration
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
 
+
+
+# RDS / PostgreSQL database configuration
+
+'''
 DATABASES = {
+
     'default': {
+
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
+
+        'NAME': '',
+
+        'USER': '',
+
+        'PASSWORD': '',
+
+        'HOST': '',
+
         'PORT': '5432',
     }
 }
+'''
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,8 +137,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -128,21 +149,27 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
 
 MEDIA_URL = 'media/'
 
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+
+
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # SMTP Configuration
 
@@ -151,20 +178,33 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = 'True'
 
-EMAIL_HOST_USER = env('EMAIL_HOST_USER'),
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD'),
 
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL'),
+'''
+
+EMAIL_HOST_USER = '' # - GMAIL email address
+EMAIL_HOST_PASSWORD = '' # - APP password
+
+DEFAULT_FROM_EMAIL = '' # - GMAIL email address
+
+'''
+
 
 # AWS configuration
 
+'''
 
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID'),  # - Enter your AWS Access Key ID HERE
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY'),  # - Enter your AWS Secret Access Key ID HERE
+AWS_ACCESS_KEY_ID = '' # - Enter your AWS Access Key ID HERE
+AWS_SECRET_ACCESS_KEY = '' # - Enter your AWS Secret Access Key ID HERE
+
+'''
+
 
 # Django 4.2 > Storage configuration for Amazon S3
 
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME'),  # - Enter your S3 bucket name HERE
+'''
+
+AWS_STORAGE_BUCKET_NAME = '' # - Enter your S3 bucket name HERE
+
 
 STORAGES = {
 
@@ -172,14 +212,21 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
     },
-
+    
     # CSS and JS file management
     "staticfiles": {
         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
-
+        
     },
 }
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 AWS_S3_FILE_OVERWRITE = False
+
+'''
+
+
+
+
+
