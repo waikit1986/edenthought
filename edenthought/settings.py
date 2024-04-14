@@ -1,9 +1,9 @@
 
 # - Import and initialise our environment variables
 
-#import environ
-#env = environ.Env()
-#environ.Env.read_env()
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 
 from pathlib import Path
@@ -102,18 +102,12 @@ DATABASES = {
 
 DATABASES = {
 
-    'default': {
-
+     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'edenthought',
-
-        'USER': 'waikit_db',
-
-        'PASSWORD': '61Me&Buddha',
-
-        'HOST': 'database-1.criq0wig2z17.us-west-1.rds.amazonaws.com',
-
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
         'PORT': '5432',
     }
 }
@@ -193,8 +187,7 @@ DEFAULT_FROM_EMAIL = '' # - GMAIL email address
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIA3LABP6GBV6WPGCHU' # - Enter your AWS Access Key ID HERE
-AWS_SECRET_ACCESS_KEY = 'a6KIm52L3DMLbU8sLVYb86antQdIcR65iaouWpdp' # - Enter your AWS Secret Access Key ID HERE
+
 
 
 
